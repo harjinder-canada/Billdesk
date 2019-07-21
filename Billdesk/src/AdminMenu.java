@@ -1,10 +1,6 @@
 import java.awt.event.*;
 import javax.swing.*;
 class AdminMenu extends JFrame implements ActionListener{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	String username,employee_id;
 	JMenuBar menubar;
 	JMenu operations, profile, logout;
