@@ -38,15 +38,12 @@ class CustomerMenu extends JFrame implements ActionListener{
 	}
 	CustomerMenu(String username,String cust_id){
 		//etype=stype;
-		setTitle("Customer Menu bar");
+		setTitle("Employee Menu bar");
 		setSize(500,500);
 		name=username;
 		id=cust_id;
 		mbar=new JMenuBar();
 		
-		op=new JMenu("OPERATION");
-			op.addActionListener(this);
-		pro=new JMenu("PROFILE");
 		log=new JMenu("LOGOUT");
 		
 		chalan=new JMenuItem("CHALAN");
@@ -67,24 +64,28 @@ class CustomerMenu extends JFrame implements ActionListener{
 			Connection con=DriverManager.getConnection("jdbc:mysql:///billdesk","root","Mysql1234!");
 			Statement st=con.createStatement();
 			String qr="select * from employees where id='"+id+"'";
-			//String qr="select * from employee where username='test'";
 			ResultSet rs=st.executeQuery(qr);
 			if(rs.next()){
-				op.add(water);
-				op.add(chalan);
-				op.add(elec);
+				switch((String) rs.getString("work_assigned")) {
+				case "1": 
+					op.add(chalan);
+					break;
+				case "2":
+					op.add(water);
+					break;
+				case "3":
+					op.add(elec);
+					break;
+				default :
+				}
 			}
 		}catch(Exception e){
 			JOptionPane.showMessageDialog(null,e);
 		}
 		
-		pro.add(change);
-		pro.add(ed);
-		
 		log.add(sign);
 		
 		mbar.add(op);
-		mbar.add(pro);
 		mbar.add(log);
 		
 		setJMenuBar(mbar);

@@ -18,15 +18,16 @@ class WaterBill extends JFrame implements ActionListener {
 		if(gm.getSource()==search){
 			try{
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql:///project","root","");
+				Connection con=DriverManager.getConnection("jdbc:mysql:///billdesk","root","Mysql1234!");
 				Statement st=con.createStatement();
-				String qr="select * from water where meter_no='"+smeter+"'";
+				String qr="select * from water_meter where meter_id='"+smeter+"'";
 				ResultSet rs=st.executeQuery(qr);
 				if(rs.next()){
 					if(rs.getString(6).equals("1")){
-						JOptionPane.showMessageDialog(null,"electricity BILL is already paid");
+						JOptionPane.showMessageDialog(null,"Water BILL is already paid");
 					}else{
-						txtunit.setText(rs.getString(3));
+						int new_reading = Integer.parseInt(rs.getString(3)) - Integer.parseInt(rs.getString(2));
+						txtunit.setText(Integer.toString(new_reading));
 						txtbill.setText(rs.getString(4));
 					}
 				}
@@ -38,30 +39,24 @@ class WaterBill extends JFrame implements ActionListener {
 			smeter=txtmeter.getText();
 			sbill=txtbill.getText();
 			samount=txtamount.getText();
-			int amt=Integer.parseInt(samount);
-			int bill=Integer.parseInt(sbill);
-			if(amt<bill){
-				JOptionPane.showMessageDialog(null,"Please Enter proper ammount");
-				
-			}
-		else{
-			try{
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql:///project","root","");
-				Statement st=con.createStatement();
-				String qr="update water set status=1,paid='"+sbill+"' where meter_no='"+smeter+"'";
-				
-				int a=st.executeUpdate(qr);
-				if(a>0){
-					JOptionPane.showMessageDialog(null,"Paid");
-					}else{
-					JOptionPane.showMessageDialog(null,"Error while paying please try again");
+			
+				try{
+					
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql:///billdesk","root","Mysql1234!");
+					Statement st=con.createStatement();
+					String qr="update water_meter set status=1, amount_paid='"+sbill+"' where meter_id='"+smeter+"'";
+					
+					int a=st.executeUpdate(qr);
+					if(a>0){
+						JOptionPane.showMessageDialog(master,"Paid");
+						}else{
+						JOptionPane.showMessageDialog(master,"Error while paying please try again");
+						}
+					}catch(Exception e){
+					JOptionPane.showMessageDialog(null,e);
 					}
-				}catch(Exception e){
-				JOptionPane.showMessageDialog(null,e);
-				}
 			}
-		}
 		if(gm.getSource()==reset){
 			txtmeter.setText("");
 			txtbill.setText("");

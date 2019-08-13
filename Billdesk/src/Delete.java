@@ -21,18 +21,18 @@ class Delete extends JFrame implements ActionListener {
 			}else{
 				try{
 					Class.forName("com.mysql.jdbc.Driver");
-					Connection con=DriverManager.getConnection("jdbc:mysql:///project","root","");
+					Connection con=DriverManager.getConnection("jdbc:mysql:///billdesk","root","Mysql1234!");
 					Statement state=con.createStatement();
-					String q="select * from employee where username='"+suname+"'";
+					String q="select * from employees where username='"+suname+"'";
 					ResultSet rs=state.executeQuery(q);
 					if(rs.next()){
-						txt1.setText(rs.getString("name"));
+						txt1.setText(rs.getString("first_name"));
 					}
 					else{
-						JOptionPane.showMessageDialog(null,"NO RECORD FOUND");
+						JOptionPane.showMessageDialog(master,"NO RECORD FOUND");
 					}
 				}catch(Exception e){
-					JOptionPane.showMessageDialog(null,e);
+					JOptionPane.showMessageDialog(master,e);
 				}
 			}
 			
@@ -40,24 +40,25 @@ class Delete extends JFrame implements ActionListener {
 		if(gm.getSource()==delete){
 			suname=txt.getText();
 			if(suname.equals("")){
-				JOptionPane.showMessageDialog(null,"User name is require:");
+				JOptionPane.showMessageDialog(master,"User name is require:");
 				
 			}else{
 				try{
 					Class.forName("com.mysql.jdbc.Driver");
-					Connection cn=DriverManager.getConnection("jdbc:mysql:///project","root","");
+					Connection cn=DriverManager.getConnection("jdbc:mysql:///billdesk","root","Mysql1234!");
 					Statement st=cn.createStatement();
-					String qr="delete from employee where username='"+suname+"'";
+					String qr="delete from employees where username='"+suname+"'";
 					int g=st.executeUpdate(qr);
 					if(g>0){
-						JOptionPane.showMessageDialog(null,g+" row delete");
+						JOptionPane.showMessageDialog(master,g+" row delete");
+						setVisible(false);
 					}
 					else{
-						JOptionPane.showMessageDialog(null,"NO row delete");
+						JOptionPane.showMessageDialog(master,"NO row delete");
 					}
 				}
 			catch(Exception e){
-				JOptionPane.showMessageDialog(null,e);
+				JOptionPane.showMessageDialog(master,e);
 			}
 		}
 	}
@@ -66,10 +67,9 @@ class Delete extends JFrame implements ActionListener {
 			txt1.setText("");}
 
 	}
-	public static void main(String arg[]){
-		new Delete();
-	}
+	
 	Delete(){
+		
 		uname=new JLabel("User Name :");
 		name=new JLabel("Name :");
 		
@@ -81,26 +81,27 @@ class Delete extends JFrame implements ActionListener {
 		delete=new JButton("DELETE");
 		reset=new JButton("RESET");
 		pnl=new JPanel();
-			pnl.add(txt);
-			pnl.add(search);
-			search.addActionListener(this);
-		panl=new JPanel(new GridLayout(3,2,5,5));
-			setTitle("This is search Form :");
-			setSize(800,500);
-			panl.add(uname);
-			panl.add(pnl);
+		pnl.add(txt);
+		pnl.add(search);
+		search.addActionListener(this);
+		panl=new JPanel(new GridLayout(5,10,10,10));
+		setTitle("Delete Employee Profile");
+		setSize(800,500);
 			
-			panl.add(name);
-			panl.add(txt1);
-			
-			panl.add(delete);
-				delete.addActionListener(this);
-			panl.add(reset);
-				reset.addActionListener(this);
-			master=new JPanel();
-				master.setBackground(Color.cyan);
-				master.add(panl);
-			add(master);
-			setVisible(true);
+		panl.add(uname);
+		panl.add(pnl);
+		
+		panl.add(name);
+		panl.add(txt1);
+		
+		panl.add(delete);
+			delete.addActionListener(this);
+		panl.add(reset);
+			reset.addActionListener(this);
+		master=new JPanel();
+			master.setBackground(Color.cyan);
+			master.add(panl);
+		add(master);
+		setVisible(true);
 	}
 }

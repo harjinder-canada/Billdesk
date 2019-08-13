@@ -28,7 +28,7 @@ class ChangePassword extends JFrame implements ActionListener{
 			else{
 				try{
 					Class.forName("com.mysql.jdbc.Driver");
-					Connection con=DriverManager.getConnection("jdbc:mysql:///project","root","");
+					Connection con=DriverManager.getConnection("jdbc:mysql:///billdesk","root","Mysql1234!");
 					Statement st=con.createStatement();
 					String g="select * from "+stype+" where username='"+suname+"' and password='"+soldpass+"' and id="+sid;
 					ResultSet rs=st.executeQuery(g);
@@ -36,16 +36,17 @@ class ChangePassword extends JFrame implements ActionListener{
 						String k="update "+stype+" set password='"+snewpass+"'where username='"+suname+"' and id='"+sid+"'";
 						int a=st.executeUpdate(k);
 						if(a>0){
-							JOptionPane.showMessageDialog(null,"password updated");
+							JOptionPane.showMessageDialog(master, "password updated");
 							oldp.setText("");
 							newp.setText("");
 							confp.setText("");
+							setVisible(false);
 						}
 					}else{
-							JOptionPane.showMessageDialog(null,"Old password not matched");
+							JOptionPane.showMessageDialog(master,"Old password not matched");
 					}
 				}catch(Exception e){
-					JOptionPane.showMessageDialog(null,e);
+					JOptionPane.showMessageDialog(master,e);
 				}
 			}
 			
@@ -90,6 +91,7 @@ class ChangePassword extends JFrame implements ActionListener{
 		
 		master=new JPanel();
 			master.add(panl);
+			master.setBackground(Color.cyan);
 		add(master);
 		
 		setVisible(true);

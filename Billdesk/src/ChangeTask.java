@@ -73,7 +73,7 @@ class Edit extends JFrame implements ActionListener{
 					ResultSet rs=state.executeQuery(q);
 					if(rs.next()){
 						txtusr.setEnabled(false);
-						txtname.setText(rs.getString("username"));
+						txtname.setText(rs.getString("first_name"));
 						cmbwork.setSelectedItem(rs.getString("work_assigned"));
 						cmbwork.setEnabled(true);
 						edit.setEnabled(true);
@@ -105,25 +105,24 @@ class Edit extends JFrame implements ActionListener{
 		
 		txtusr=new JTextField(10);
 		txtname=new JTextField(20);
-			txtname.setEnabled(false);
+		txtname.setEnabled(false);
 		cmbwork=new JComboBox<String>();
-			cmbwork.addItem("=Select Work=");
-			cmbwork.addItem("Challan Collector");
-			cmbwork.addItem("Water Bill Collector");
-			cmbwork.addItem("Electricity Bill Collector");
+		cmbwork.addItem("=Select Work=");
+		cmbwork.addItem("Challan Collector");
+		cmbwork.addItem("Water Bill Collector");
+		cmbwork.addItem("Electricity Bill Collector");
 		cmbwork.setEnabled(false);
 		edit=new JButton("EDIT");
-			edit.addActionListener(this);
-			edit.setEnabled(false);
+		edit.addActionListener(this);
+		edit.setEnabled(false);
 		reset=new JButton("RESET");
-			reset.addActionListener(this);
+		reset.addActionListener(this);
 		search=new JButton("SEARCH");
-			search.addActionListener(this);
+		search.addActionListener(this);
 		
 		panl1=new JPanel();
-			panl1.setBackground(Color.cyan);
-			panl1.add(txtusr);
-			panl1.add(search);
+		panl1.add(txtusr);
+		panl1.add(search);
 		panl=new JPanel(new GridLayout(4,2,5,5));
 		panl.add(usr);
 		panl.add(panl1);
@@ -136,12 +135,15 @@ class Edit extends JFrame implements ActionListener{
 		
 		panl.add(edit);
 		panl.add(reset);
-		
+				
 		master=new JPanel();
-			master.add(panl);
+		master.add(panl);
+		master.setBackground(Color.cyan);
+
 		add(master);
+		
 		setSize(800,400);
-			setTitle("EDIT FORM");
-			setVisible(true);
+		setTitle("EDIT FORM");
+		setVisible(true);
 	}
 }
