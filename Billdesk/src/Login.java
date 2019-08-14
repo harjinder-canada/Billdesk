@@ -41,7 +41,7 @@ class Login extends JFrame implements ActionListener{
 						String query="select * from employees where username='"+username_val+"' and password='"+password_val+"'";
 						ResultSet rs=st.executeQuery(query);
 						if(rs.next()){
-							new CustomerMenu(username_val, rs.getString(1));
+							new EmployeeMenu(username_val, rs.getString(1));
 							setVisible(false);
 						}else{
 							JOptionPane.showMessageDialog(master,"User name & password are wrong:");
@@ -101,6 +101,6 @@ class Login extends JFrame implements ActionListener{
 	}
 	public static void main(String arg[]){
 		//new Login();
-		new ElectricityBill();
+		new EmployeeMenu("water_bill","5");
 	}
 }

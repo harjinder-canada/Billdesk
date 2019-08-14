@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
 import java.awt.event.*;
-class CustomerMenu extends JFrame implements ActionListener{
+class EmployeeMenu extends JFrame implements ActionListener{
 	/**
 	 * 
 	 */
@@ -11,13 +11,13 @@ class CustomerMenu extends JFrame implements ActionListener{
 	JMenu op,pro,log;
 	JMenuItem chalan,water,elec,ed,change,sign;
 	String name,id;
-	JLabel type;
+	JLabel label = new JLabel("<html> <body><p>Please select one of the task from menu bar to move further.</p></body></html>");
 	JTextField txttype;
 	JPanel master,panl;
 	String etype,wt;
 	public void actionPerformed(ActionEvent gm){
 		if(gm.getSource()==change){
-			//ChangePassword ob=new ChangePassword(name,id,"employee");
+			new ChangePassword(name,id,"employees");
 		}
 		if(gm.getSource()==sign){
 			new Login();
@@ -36,13 +36,15 @@ class CustomerMenu extends JFrame implements ActionListener{
 			new ElectricityBill();
 		}
 	}
-	CustomerMenu(String username,String cust_id){
+	EmployeeMenu(String username,String cust_id){
 		//etype=stype;
 		setTitle("Employee Menu bar");
 		setSize(500,500);
 		name=username;
 		id=cust_id;
 		mbar=new JMenuBar();
+		op=new JMenu("OPERATION");
+		op.addActionListener(this);
 		
 		log=new JMenu("LOGOUT");
 		
@@ -80,7 +82,7 @@ class CustomerMenu extends JFrame implements ActionListener{
 				}
 			}
 		}catch(Exception e){
-			JOptionPane.showMessageDialog(null,e);
+			JOptionPane.showMessageDialog(master,e);
 		}
 		
 		log.add(sign);
@@ -89,13 +91,9 @@ class CustomerMenu extends JFrame implements ActionListener{
 		mbar.add(log);
 		
 		setJMenuBar(mbar);
-		type=new JLabel("Work Type");
-		txttype=new JTextField(10);
-		
 		panl=new JPanel();
+			panl.add(label);
 			panl.setBackground(Color.cyan);
-			panl.add(type);
-			panl.add(txttype);
 		master=new JPanel();
 			master.setBackground(Color.blue);
 			master.add(panl);

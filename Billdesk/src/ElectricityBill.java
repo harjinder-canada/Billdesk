@@ -24,37 +24,44 @@ class ElectricityBill extends JFrame implements ActionListener {
 				ResultSet rs=st.executeQuery(qr);
 				if(rs.next()){
 					if(rs.getString(6).equals("1")){
-						JOptionPane.showMessageDialog(null,"electricity BILL is already paid");
+						JOptionPane.showMessageDialog(master,"Electricity bill is already paid");
 					}else{
 						int new_reading = Integer.parseInt(rs.getString(3)) - Integer.parseInt(rs.getString(2));
 						txtunit.setText(Integer.toString(new_reading));
 						txtbill.setText(rs.getString(4));
 					}
+				}else {
+					JOptionPane.showMessageDialog(master,"No Record Found!!");
 				}
 			}catch(Exception e){
-				JOptionPane.showMessageDialog(null,e);
+				JOptionPane.showMessageDialog(master,e);
 			}
 		}
 		if(gm.getSource()==submit){
 			smeter=txtmeter.getText();
 			sbill=txtbill.getText();
 			samount=txtamount.getText();
-			
+			double bill=Double.parseDouble(sbill);
+			double amount=Double.parseDouble(samount);
+			if(amount<bill || amount>bill){
+				JOptionPane.showMessageDialog(master,"Please enter exact bill amount.");
+			}else{
 			try{
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con=DriverManager.getConnection("jdbc:mysql:///billdesk","root","Mysql1234!");
-				Statement st=con.createStatement();
-				String qr="update electricity_meter set status=1, amount_paid='"+sbill+"' where meter_id='"+smeter+"'";
-				
-				int a=st.executeUpdate(qr);
-				if(a>0){
-					JOptionPane.showMessageDialog(null,"Paid");
-				}else{
-					JOptionPane.showMessageDialog(null,"Error while paying please try again");
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql:///billdesk","root","Mysql1234!");
+					Statement st=con.createStatement();
+					String qr="update electricity_meter set status=1, amount_paid='"+sbill+"' where meter_id='"+smeter+"'";
+					
+					int a=st.executeUpdate(qr);
+					if(a>0){
+						JOptionPane.showMessageDialog(master,"Bill Paid Successfully!!");
+					}else{
+						JOptionPane.showMessageDialog(master,"Error while paying please try again");
+					}
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(master,e);
 				}
-			}catch(Exception e){
-				JOptionPane.showMessageDialog(null,e);
-				}
+			}
 			}
 		if(gm.getSource()==reset){
 			txtmeter.setText("");
@@ -107,8 +114,8 @@ class ElectricityBill extends JFrame implements ActionListener {
 		panl.add(reset);
 		
 		master=new JPanel();
-			master.setBackground(Color.cyan);
-			master.add(panl);
+		master.setBackground(Color.cyan);
+		master.add(panl);
 		add(master);
 		setVisible(true);
 	}

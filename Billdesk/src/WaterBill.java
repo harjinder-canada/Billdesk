@@ -24,21 +24,28 @@ class WaterBill extends JFrame implements ActionListener {
 				ResultSet rs=st.executeQuery(qr);
 				if(rs.next()){
 					if(rs.getString(6).equals("1")){
-						JOptionPane.showMessageDialog(null,"Water BILL is already paid");
+						JOptionPane.showMessageDialog(master,"Water BILL is already paid");
 					}else{
 						int new_reading = Integer.parseInt(rs.getString(3)) - Integer.parseInt(rs.getString(2));
 						txtunit.setText(Integer.toString(new_reading));
 						txtbill.setText(rs.getString(4));
 					}
+				}else {
+					JOptionPane.showMessageDialog(master,"No Record Found!!");
 				}
 			}catch(Exception e){
-				JOptionPane.showMessageDialog(null,e);
+				JOptionPane.showMessageDialog(master,e);
 			}
 		}
 		if(gm.getSource()==submit){
 			smeter=txtmeter.getText();
 			sbill=txtbill.getText();
 			samount=txtamount.getText();
+			double bill=Double.parseDouble(sbill);
+			double amount=Double.parseDouble(samount);
+			if(amount<bill || amount>bill){
+				JOptionPane.showMessageDialog(master,"Please enter exact bill amount.");
+			}else{
 			
 				try{
 					
@@ -49,13 +56,14 @@ class WaterBill extends JFrame implements ActionListener {
 					
 					int a=st.executeUpdate(qr);
 					if(a>0){
-						JOptionPane.showMessageDialog(master,"Paid");
+						JOptionPane.showMessageDialog(master,"Bill Paid Successfully!!");
 						}else{
 						JOptionPane.showMessageDialog(master,"Error while paying please try again");
 						}
 					}catch(Exception e){
-					JOptionPane.showMessageDialog(null,e);
+					JOptionPane.showMessageDialog(master,e);
 					}
+				}
 			}
 		if(gm.getSource()==reset){
 			txtmeter.setText("");

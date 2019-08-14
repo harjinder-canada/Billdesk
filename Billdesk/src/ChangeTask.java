@@ -42,7 +42,7 @@ class Edit extends JFrame implements ActionListener{
 					String q="update employees set work_assigned='"+swork+"' where username='"+suname+"'";
 					int a=state.executeUpdate(q);
 					if(a>0){
-						JOptionPane.showMessageDialog(null,"Work Updated");
+						JOptionPane.showMessageDialog(master,"Work Updated");
 						edit.setEnabled(false);
 						txtusr.setText("");
 						txtusr.setEnabled(true);
@@ -51,10 +51,10 @@ class Edit extends JFrame implements ActionListener{
 						cmbwork.setEnabled(false);
 					}
 					else{
-						JOptionPane.showMessageDialog(null,"Work Not Updated");
+						JOptionPane.showMessageDialog(master,"Work Not Updated");
 					}
 				}catch(Exception e){
-					JOptionPane.showMessageDialog(null,e);
+					JOptionPane.showMessageDialog(master,e);
 				}
 			}
 					
@@ -79,10 +79,10 @@ class Edit extends JFrame implements ActionListener{
 						edit.setEnabled(true);
 					}
 					else{
-						JOptionPane.showMessageDialog(null,"NO RECORD FOUND");
+						JOptionPane.showMessageDialog(master,"NO RECORD FOUND");
 					}
 				}catch(Exception e){
-					JOptionPane.showMessageDialog(null,e);
+					JOptionPane.showMessageDialog(master,e);
 					System.out.println("Exception is :"+e);
 				}
 			}

@@ -39,14 +39,14 @@ class EditEmp extends JFrame implements ActionListener{
 					System.out.println(q);
 					int a=st.executeUpdate(q);
 					if(a>0){
-						JOptionPane.showMessageDialog(null,"Values updated");
+						JOptionPane.showMessageDialog(master,"Values updated");
 						setVisible(false);
 					}
 					else{
-						JOptionPane.showMessageDialog(null,"Values not updated");
+						JOptionPane.showMessageDialog(master,"Values not updated");
 					}
 				 }catch(Exception e){
-					JOptionPane.showMessageDialog(null,e);
+					JOptionPane.showMessageDialog(master,e);
 				}
 			}
 		}

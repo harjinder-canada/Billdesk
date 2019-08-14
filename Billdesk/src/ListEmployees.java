@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +16,7 @@ public class ListEmployees extends JFrame implements ActionListener {
 	String[] columnNames = {"ID", "User name", "Name", "Task Assigned", "Email", "Phone No"};
 	Object emp_data[][] = new Object[6][10];
 	
-	String username_val,password_val, first_name_val, last_name_val, email_val, phone_val, zip_code_val,city_val, state_val, id;
+	String first_name_val, last_name_val, email_val, phone_val, id;
 	JPanel master, panel;
 	JTable table;
 	

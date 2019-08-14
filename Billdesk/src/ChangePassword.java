@@ -23,7 +23,7 @@ class ChangePassword extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(master,"All fields is require :");
 			}
 			else if(!snewpass.equals(sconfpass)){
-				JOptionPane.showMessageDialog(null,"New password and Confirm Password is not match:");
+				JOptionPane.showMessageDialog(master,"New password and Confirm Password is not match:");
 			}
 			else{
 				try{
