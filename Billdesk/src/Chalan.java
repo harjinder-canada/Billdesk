@@ -71,8 +71,8 @@ class Chalan extends JFrame implements ActionListener{
 	}
 }
 	Chalan(){
-		vehical_no=new JLabel("CHALAN NO");
-		chalan_no=new JLabel("VEHICAL NO");
+		vehical_no=new JLabel("VEHICLE NO");
+		chalan_no=new JLabel("CHALLAN");
 		fine=new JLabel("FINE");
 		paid=new JLabel("PAID AMOUNT");
 		
@@ -97,7 +97,7 @@ class Chalan extends JFrame implements ActionListener{
 		
 		panel=new JPanel(new GridLayout(5,2,5,5));
 		setSize(500,500);
-		setTitle("PAY CHALAN");
+		setTitle("PAY CHALLAN");
 		panel.add(chalan_no);
 		panel.add(grp);
 		

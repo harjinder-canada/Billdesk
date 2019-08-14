@@ -100,7 +100,6 @@ class Login extends JFrame implements ActionListener{
 			
 	}
 	public static void main(String arg[]){
-		//new Login();
-		new EmployeeMenu("water_bill","5");
+		new Login();
 	}
 }

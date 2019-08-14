@@ -10,12 +10,12 @@ class AdminMenu extends JFrame implements ActionListener{
 	String username,employee_id;
 	JMenuBar menubar;
 	JMenu operations, profile, logout;
-	JMenuItem register, list_emp, edit, delete, change_password, sign_in;
+	JMenuItem register, list_emp, edit, delete, change_password, sign_out;
 	JLabel label = new JLabel("<html> <body><p>Please select one of the task from menu bar to move further.</p></body></html>");
 	JPanel panel, master;
 	
 	public void actionPerformed(ActionEvent m){
-		if(m.getSource()==sign_in){
+		if(m.getSource()==sign_out){
 			new Login();
 			setVisible(false);
 		}
@@ -47,19 +47,20 @@ class AdminMenu extends JFrame implements ActionListener{
 		profile = new JMenu("Profile");
 		logout = new JMenu("Logout");
 		
-		register = new JMenuItem("Registration");
+		register = new JMenuItem("Register new employee");
 		register.addActionListener(this);
 		list_emp = new JMenuItem("List of employees");
 		list_emp.addActionListener(this);
-		edit = new JMenuItem("Edit Task");
+		edit = new JMenuItem("Edit task for employee");
 		edit.addActionListener(this);
-		delete = new JMenuItem("Delete");
+		delete = new JMenuItem("Delete employee");
 		delete.addActionListener(this);
 		change_password = new JMenuItem("Change Password");
-		
 		change_password.addActionListener(this);
-		sign_in = new JMenuItem("SIGN OUT");
-		sign_in.addActionListener(this);
+		
+		sign_out = new JMenuItem("SIGN OUT");
+		sign_out.addActionListener(this);
+		
 		operations.add(register);
 		operations.add(list_emp);
 		operations.add(edit);
@@ -67,7 +68,7 @@ class AdminMenu extends JFrame implements ActionListener{
 		
 		profile.add(change_password);
 		
-		logout.add(sign_in);
+		logout.add(sign_out);
 			
 		menubar.add(operations);
 		menubar.add(profile);
