@@ -44,7 +44,7 @@ class Login extends JFrame implements ActionListener{
 							new EmployeeMenu(username_val, rs.getString(1));
 							setVisible(false);
 						}else{
-							JOptionPane.showMessageDialog(master,"User name & password are wrong:");
+							JOptionPane.showMessageDialog(master,"Please check your username & Password");
 						}
 					}
 				}
